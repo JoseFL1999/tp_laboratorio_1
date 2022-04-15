@@ -44,7 +44,7 @@ int main()
 				break;
 			case 3:
 			    validation=validationIngress(&enterKilometro, &priceFlightAero, &priceFlightLatam);
-			    if(validation==1)
+			    if(validation==0)
 			    {
 			    	calculateDescount(priceFlightAero, &priceDebitAero, 10);
 			    	calculateDescount(priceFlightLatam, &priceDebitLatam, 10);

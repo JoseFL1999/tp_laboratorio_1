@@ -13,7 +13,7 @@
 int calculateInterest(float num, float *result, float porcent)
 {
     int retorno;
-    retorno=1;
+    retorno=-1;
     if(result!=NULL)
     {
         *result= num - (num*porcent/100);
@@ -24,7 +24,7 @@ int calculateInterest(float num, float *result, float porcent)
 int calculateDescount(float num, float *result, float porcent)
 {
     int retorno;
-    retorno=1;
+    retorno=-1;
     if(result!=NULL)
     {
         *result= num + (num*porcent/100);
@@ -37,7 +37,7 @@ int calculatePriceBTC(float num, float *result)
     int retorno;
     int BTC;
     BTC = 4606954.55;
-    retorno=1;
+    retorno=-1;
     if(result!=NULL)
     {
         *result= num/BTC;
@@ -49,7 +49,7 @@ int calculatePriceBTC(float num, float *result)
 int diferencePrices(float num1, float num2, float *result)
 {
     int retorno;
-    retorno=1;
+    retorno=-1;
     if(result != NULL)
     {
         *result=num1-num2;
@@ -68,7 +68,7 @@ int getKilometro(float* pResult, char* message, char* messageError, float minimu
 {
 	float bufferInt;
 	int retorno;
-	retorno=1;
+	retorno=-1;
 	if(pResult != NULL && message != NULL && messageError != NULL && retry >=0 )
 	{
 		do
@@ -98,7 +98,7 @@ int maskMenu(int *option, float kilometer, float priceAero, float priceLatam)
 {
 	int retorno;
 	int bufferOption;
-	retorno=1;
+	retorno=-1;
 	if(option!=NULL)
 	{
 		if(kilometer!=-1)
@@ -178,7 +178,7 @@ int getPriceAeroLatam(float *pResultAero, float *pResultLatam, char *messageAero
 	int retorno;
 	float bufferPriceAero;
 	float bufferPriceLatam;
-	retorno=1;
+	retorno=-1;
 	if(pResultAero!=NULL && messageAero!=NULL && messageError!=NULL && pResultLatam!=NULL && messageLatam!=NULL)
 	{
 		printf("Solo tendra 2 intentos para cada entrada de datos. \n");
@@ -250,22 +250,30 @@ int getPriceAeroLatam(float *pResultAero, float *pResultLatam, char *messageAero
 int validationIngress(float *kilometer, float *priceAero, float *priceLatam)
 {
 	int retorno;
-	retorno=1;
-	if(*kilometer==-1)
+	retorno=0;
+	if(kilometer!=NULL && priceAero!=NULL && priceLatam!=NULL)
 	{
-		printf("Datos de kilometro no ingresados.\n");
-		retorno=0;
+		if(*kilometer==-1)
+		{
+			printf("Datos de kilometro no ingresados.\n");
+			retorno=-1;
+		}
+		if(*priceAero==-1)
+		{
+			printf("Datos de precio Aerolineas no ingresados.\n");
+			retorno=-1;
+		}
+		if(*priceLatam==-1)
+		{
+			printf("Datos de precio Latam no ingresados.\n");
+			retorno=-1;
+		}
+		if(retorno==-1)
+		{
+			system("pause");
+		}
 	}
-	if(*priceAero==-1)
-	{
-		printf("Datos de precio Aerolineas no ingresados.\n");
-		retorno=0;
-	}
-	if(*priceLatam==-1)
-	{
-		printf("Datos de precio Latam no ingresados.\n");
-		retorno=0;
-	}
+
 	return retorno;
 }
 
